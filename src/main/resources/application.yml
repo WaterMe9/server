@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(CwUUkyAbLtf1+iNzdrFOffYs96y0md0uSbTZeQ9Ch4ydzDedMW6Xa1w+Etyro0z/wQ+pZp/cMhRUzvGadtPpSHuypzJjC9jZbKHI8Ny215iFBI6KxmOcVg==)
+    username: ENC(18JjDEicgBjx75fWUy1y+g==)
+    password: ENC(qFgoN0igRsC9TXBrnf6iNRMAiQEHffK1)
+
+  redis:
+    host: ENC(s2oyZoF87Ftu5nUTdauG+erBI5qrgQV6)
+    port: ENC(tBdHkUaSchWYUfImNFCYNQ==)
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        #show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+    open-in-view: true
+
+logging.level:
+  org.hibernate.SQL: debug
+  #org.hibernate.type: trace
+
