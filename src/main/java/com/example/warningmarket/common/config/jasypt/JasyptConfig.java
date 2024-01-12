@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@PropertySource(value = {"application-env.yml"}, factory = YamlLoadFactory.class)
+@PropertySource(value = "classpath:/application-env.yml", factory = YamlLoadFactory.class)
 public class JasyptConfig {
 
     @Value("${jasypt.encryptor.password}")

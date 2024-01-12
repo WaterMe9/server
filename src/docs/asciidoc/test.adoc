@@ -1,0 +1,18 @@
+== RestDocsTestController
+
+=== 1. GET 테스트
+==== Request
+include::{snippets}/test-controller-test/get_테스트/http-request.adoc[]
+
+==== Response
+include::{snippets}/test-controller-test/get_테스트/http-response.adoc[]
+
+
+=== 2. POST 테스트
+==== Request
+include::{snippets}/test-controller-test/post_테스트/request-fields.adoc[]
+include::{snippets}/test-controller-test/post_테스트/http-request.adoc[]
+
+==== Response
+include::{snippets}/test-controller-test/post_테스트/response-fields.adoc[]
+include::{snippets}/test-controller-test/post_테스트/http-response.adoc[]

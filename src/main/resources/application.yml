@@ -1,7 +1,11 @@
 spring:
+  config:
+    import:
+      - classpath:/application-env.yml
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ENC(CwUUkyAbLtf1+iNzdrFOffYs96y0md0uSbTZeQ9Ch4ydzDedMW6Xa1w+Etyro0z/wQ+pZp/cMhRUzvGadtPpSHuypzJjC9jZbKHI8Ny215iFBI6KxmOcVg==)
+    url: ENC(go7tA1gDWumqElU/NwTAYuYVIpPxLYkD7HBVVrrDD11lxzHD5Z2pgJItrrpZDMY35drR3wUg6pWOWbOiDYLkhXWS6gKRiUOMnz/hIncdG+byqU3QaUAJ9g==)
     username: ENC(18JjDEicgBjx75fWUy1y+g==)
     password: ENC(qFgoN0igRsC9TXBrnf6iNRMAiQEHffK1)
 
@@ -22,4 +26,5 @@ spring:
 logging.level:
   org.hibernate.SQL: debug
   #org.hibernate.type: trace
+
 
