@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  pull_request: # 해당 브랜치로 pr 왔을 때
+    branches:
+      - dev
+
+permissions: write-all # 테스트 결과 작성을 위해 쓰기 권한 추가
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # jdk 세팅
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      # gradle 캐싱
+      - name: Gradle Caching
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # gradlew 권한 추가
+      - name: Grant Execute Permission For Gradlew
+        run: chmod +x gradlew
+
+      # gradlew clean
+      - name: Clean gradle
+        run: ./gradlew clean
+
+      # gradlew stop
+      - name: Stop gradle
+        run: ./gradlew --stop
+
+      # test를 위한 mysql설정
+      - name: Start MySQL
+        uses: samin/mysql-action@v1.3
+        with:
+          host port: 3300
+          container port: 3300
+          mysql database: 'market'
+          mysql user: 'admin'
+          mysql password: 'market_pw'
+
+      # 테스트를 위한 redis 설정
+      #      - name: Start Redis
+      #        uses: supercharge/redis-github-action@1.5.0
+      #        with:
+      #          redis-port: 6370
+
+      # 빌드 위한 env yml 설정
+      - name: Make application-env.yml
+        run: |
+          cd ./src/main/resources
+          touch ./application-env.yml
+          echo "${{ secrets.PROPERTIES_ENV }}" > ./application-env.yml
+        shell: bash
+
+      # 테스트를 위한 test yml 설정
+      - name: Make application-test.yml
+        run: |
+          cd ./src/test/resources
+          touch ./application-test.yml
+          echo "${{ secrets.PROPERTIES_TEST }}" > ./application-test.yml
+        shell: bash
+
+      # 프로젝트 빌드
+      - name: Build
+        run: ./gradlew build
+
+      # 테스트 결과 파일 생성
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: ${{ always() }}
+        with:
+          files: build/test-results/**/*.xml

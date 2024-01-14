@@ -1,0 +1,70 @@
+name: CD
+
+on:
+  push: #해당 브랜치에 push 했을 때
+    branches:
+      - master
+
+env:
+  S3_BUCKET_NAME: market-deploy-bucket
+  PROJECT_NAME: server
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # jdk 세팅
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      # gradle 캐싱
+      - name: Gradle Caching
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # 배포를 위한 secret yml 설정
+      - name: Make application-env.yml
+        run: |
+          cd ./src/main/resources
+          touch ./application-env.yml
+          echo "${{ secrets.PROPERTIES_ENV }}" > ./application-ENV.yml
+        shell: bash
+
+      #jar 빌드
+      - name: Jar Build
+        run: ./gradlew bootJar
+
+      #zip파일 생성
+      - name: Make zip file
+        run: zip -r ./$GITHUB_SHA.zip .
+        shell: bash
+
+      #AWS IAM 정보 주입
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      #zip파일 s3에 업로드
+      - name: Upload to S3
+        run: aws s3 cp --region ${{ secrets.AWS_REGION }} ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+
+      #Code Deploy
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name market-deploy
+          --deployment-config-name CodeDeployDefault.AllAtOnce
+          --deployment-group-name develop
+          --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
