@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IP_ADDRESS=$(cat /home/market/ip_address.inc | cut -c17-26)
+IP_ADDRESS=$(cat /home/market/ip_address.inc | cut -c17-27)
 CURRENT_PORT=$(cat /home/market/service_url.inc | grep -Po '[0-9]+' | tail -1)
 TARGET_PORT=0
 
