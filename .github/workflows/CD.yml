@@ -3,7 +3,7 @@ name: CD
 on:
   push: #해당 브랜치에 push 했을 때
     branches:
-      - main
+      - master
 
 env:
   S3_BUCKET_NAME: market-deploy-bucket
