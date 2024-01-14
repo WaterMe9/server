@@ -9,11 +9,6 @@ import java.util.List;
 @RestController
 public class TestController {
 
-    @GetMapping("test")
-    public String test() {
-        return "test";
-    }
-
     @GetMapping("get-test")
     public TestResponse getTest() {
         return TestResponse.builder().name("란란루").build();
