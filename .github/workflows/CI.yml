@@ -59,6 +59,14 @@ jobs:
       #        with:
       #          redis-port: 6370
 
+      # 빌드 위한 env yml 설정
+      - name: Make application-env.yml
+        run: |
+          cd ./src/main/resources
+          touch ./application-env.yml
+          echo "${{ secrets.PROPERTIES_ENV }}" > ./application-env.yml
+        shell: bash
+
       # 테스트를 위한 test yml 설정
       - name: Make application-test.yml
         run: |
