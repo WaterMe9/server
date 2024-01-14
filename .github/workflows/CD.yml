@@ -6,7 +6,7 @@ on:
       - master
 
 env:
-  S3_BUCKET_NAME: market-deploy-bucket
+  S3_BUCKET_NAME: market---deploy
   PROJECT_NAME: server
 
 jobs:
