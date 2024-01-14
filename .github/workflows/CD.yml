@@ -38,7 +38,7 @@ jobs:
         run: |
           cd ./src/main/resources
           touch ./application-env.yml
-          echo "${{ secrets.PROPERTIES_ENV }}" > ./application-ENV.yml
+          echo "${{ secrets.PROPERTIES_ENV }}" > ./application-env.yml
         shell: bash
 
       #jar 빌드
