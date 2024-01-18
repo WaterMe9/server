@@ -27,7 +27,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(request -> request               // 사용자가 보내는 요청에 인증 절차 수행 필요
-                        .requestMatchers("/", "/health/check").permitAll()    // 해당 URL은 인증 절차 수행 생략 가능
+                        .requestMatchers("/", "/health/check", "/restdocs/**", "/api/member/**").permitAll()    // 해당 URL은 인증 절차 수행 생략 가능
                         .anyRequest().authenticated())                  // 나머지 요청들은 모두 인증 절차 수행해야함
 
                 .build();
