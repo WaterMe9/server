@@ -1,9 +1,6 @@
-package com.example.warningmarket.controller.test;
+package com.example.warningmarket.domain.test.controller;
 
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Arrays;
-import java.util.List;
 
 @RequestMapping("restdocs")
 @RestController

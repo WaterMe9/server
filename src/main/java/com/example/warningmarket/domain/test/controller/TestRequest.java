@@ -1,4 +1,4 @@
-package com.example.warningmarket.controller.test;
+package com.example.warningmarket.domain.test.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
