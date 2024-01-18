@@ -1,7 +1,7 @@
 package com.example.warningmarket.test;
 
 import com.example.warningmarket.common.AbstractRestDocsTests;
-import com.example.warningmarket.controller.test.TestRequest;
+import com.example.warningmarket.domain.test.controller.TestRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
