@@ -1,5 +1,9 @@
 package com.example.warningmarket.domain.test.controller;
 
+import com.example.warningmarket.common.exception.ApplicationException;
+import com.example.warningmarket.common.exception.CommonErrorCode;
+import com.example.warningmarket.common.exception.ErrorCode;
+import com.example.warningmarket.common.response.ApplicationResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("restdocs")
@@ -16,4 +20,18 @@ public class TestController {
         return TestResponse.builder().name(request.getName()).build();
     }
 
+    @GetMapping("response")
+    public ApplicationResponse<?> response() {
+        return new ApplicationResponse<>();
+    }
+
+    @GetMapping("response-data")
+    public ApplicationResponse<TestResponse> responseData() {
+        return new ApplicationResponse<>(TestResponse.builder().name("aaa").build());
+    }
+
+    @GetMapping("response-error")
+    public ApplicationResponse<ErrorCode> responseError() {
+        throw new ApplicationException(CommonErrorCode.INTERNAL_SERVER_ERROR);
+    }
 }
