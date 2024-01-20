@@ -22,7 +22,10 @@ public class GlobalExceptionHandler {
         CommonErrorCode errorCode = CommonErrorCode.INTERNAL_SERVER_ERROR;
         return ResponseEntity
                 .status(errorCode.getHttpStatus())
-                .body(new ApplicationResponse<>(errorCode));
+                .body(new ApplicationResponse<>(
+                        errorCode.getHttpStatus(),
+                        e.getMessage()
+                ));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
