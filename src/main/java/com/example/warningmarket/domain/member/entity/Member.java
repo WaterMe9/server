@@ -27,14 +27,17 @@ public class Member {
     private Address address;
 
     @Builder
-    public Member(String username, String email, String password, Double temperature,
+    public Member(String username, String email, String password,
                   String profileImageUrl, Authority authority, Address address) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.temperature = temperature;
-        this.profileImageUrl = profileImageUrl;
-        this.authority = authority;
+        if(profileImageUrl != null) this.profileImageUrl = profileImageUrl;
+        if(authority != null) this.authority = authority;
         this.address = address;
+    }
+
+    public void updateTemperature(Double temperature) {
+        this.temperature = temperature;
     }
 }
