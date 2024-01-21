@@ -32,4 +32,17 @@ logging.level:
   org.hibernate.SQL: debug
   #org.hibernate.type: trace
 
+cloud:
+  aws:
+    s3:
+      bucket: market---bucket
+    credentials:
+      access-key: ENC(+EUsHFVQLMKZ6oeLcfo9AOkDQ5a+f3DHlXpI0v+ZG7g=)
+      secret-key: ENC(BUHYXUyC2n36a/hnjdGLm9wnilKaSaitJfGubsLpi7DaUwQCPyum0kx/YnvpT3/UFz3zj+NLn4w=)
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+
 
