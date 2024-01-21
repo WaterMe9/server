@@ -3,7 +3,7 @@ package com.example.warningmarket.domain.item.entity;
 import lombok.Getter;
 
 @Getter
-public enum ItemCategory {
+public enum ItemCategoryType {
 
     DEVICE("디지털기기"),
     APPLIANCES("생활가전"),
@@ -20,22 +20,13 @@ public enum ItemCategory {
 
     private final String value;
 
-    private ItemCategory(String value) {
+    private ItemCategoryType(String value) {
         this.value = value;
     }
 
-    public static String valueToEnum(String value) {
-        for (ItemCategory category : ItemCategory.values()) {
+    public static ItemCategoryType valueToEnum(String value) {
+        for (ItemCategoryType category : ItemCategoryType.values()) {
             if (category.getValue().equals(value)) {
-                return category.toString();
-            }
-        }
-        return null;
-    }
-
-    public static ItemCategory stringToEnum(String value) {
-        for (ItemCategory category : ItemCategory.values()) {
-            if (category.toString().equals(value)) {
                 return category;
             }
         }
