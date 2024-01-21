@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,28 +32,42 @@ public class Item extends BaseEntity {
 
     private String description;
 
-    @Convert(converter = ItemCategoryConvertor.class)
-    private List<ItemCategory> itemCategories;
-
-    @Convert(converter = ItemImageUrlConverter.class)
-    private List<String> itemImageUrls;
-
     @Convert(converter = BooleanToYNConverter.class)
     private Boolean agreeYn;
 
     @Convert(converter = BooleanToYNConverter.class)
     private Boolean tradeYn;
 
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemImage> itemImages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemCategory> itemCategories = new ArrayList<>();
+
+    private void setItemImages(List<ItemImage> itemImages){
+        for (ItemImage itemImage : itemImages) {
+            this.itemImages.add(itemImage);
+            itemImage.setItem(this);
+        }
+    }
+
+    private void setItemCategories(List<ItemCategory> itemCategories) {
+        for (ItemCategory itemCategory : itemCategories) {
+            this.itemCategories.add(itemCategory);
+            itemCategory.setItem(this);
+        }
+    }
+
     @Builder
-    public Item(Member seller, String itemName, int price, String description, List<ItemCategory> itemCategories, List<String> itemImageUrls) {
+    public Item(Member seller, String itemName, int price, String description, List<ItemCategory> itemCategories, List<ItemImage> itemImages) {
         this.seller = seller;
         this.itemName = itemName;
         this.price = price;
         this.description = description;
-        this.itemCategories = itemCategories;
-        this.itemImageUrls = itemImageUrls;
         this.agreeYn = false;
         this.tradeYn = false;
+        setItemCategories(itemCategories);
+        setItemImages(itemImages);
     }
 
 }
