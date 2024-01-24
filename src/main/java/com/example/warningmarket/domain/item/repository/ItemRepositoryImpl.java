@@ -67,6 +67,10 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
     private ItemSearchListResponse checkLastPage(List<ItemSearchQueryDto> result, Pageable pageable, String order) {
         boolean hasNext = false;
 
+        if (result.isEmpty()) {
+            return new ItemSearchListResponse(result, hasNext, 0L, 0L);
+        }
+
         if(result.size() > pageable.getPageSize()) {
             hasNext = true;
             result.remove(pageable.getPageSize());
