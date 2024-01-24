@@ -1,5 +1,6 @@
 package com.example.warningmarket.common.jwt;
 
+import com.example.warningmarket.common.config.jasypt.YamlLoadFactory;
 import com.example.warningmarket.common.exception.ApplicationException;
 import com.example.warningmarket.domain.member.dto.TokenDto;
 import io.jsonwebtoken.*;
@@ -8,6 +9,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

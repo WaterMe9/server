@@ -17,16 +17,16 @@ public class GlobalExceptionHandler {
                 .body(new ApplicationResponse<>(e.getErrorCode()));
     }
 
-//    @ExceptionHandler(RuntimeException.class)
-//    public ResponseEntity<ApplicationResponse<ErrorCode>> runtimeException(RuntimeException e) {
-//        CommonErrorCode errorCode = CommonErrorCode.INTERNAL_SERVER_ERROR;
-//        return ResponseEntity
-//                .status(errorCode.getHttpStatus())
-//                .body(new ApplicationResponse<>(
-//                        errorCode.getHttpStatus(),
-//                        e.getMessage()
-//                ));
-//    }
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ApplicationResponse<ErrorCode>> runtimeException(RuntimeException e) {
+        CommonErrorCode errorCode = CommonErrorCode.INTERNAL_SERVER_ERROR;
+        return ResponseEntity
+                .status(errorCode.getHttpStatus())
+                .body(new ApplicationResponse<>(
+                        errorCode.getHttpStatus(),
+                        e.getMessage()
+                ));
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApplicationResponse<ErrorCode>> validException(MethodArgumentNotValidException e) {
