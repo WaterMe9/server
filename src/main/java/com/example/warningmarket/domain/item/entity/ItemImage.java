@@ -1,5 +1,6 @@
 package com.example.warningmarket.domain.item.entity;
 
+import com.example.warningmarket.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ItemImage {
+public class ItemImage extends BaseEntity {
 
     @Id
     @GeneratedValue

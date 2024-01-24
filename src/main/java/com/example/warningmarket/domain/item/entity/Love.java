@@ -1,5 +1,6 @@
 package com.example.warningmarket.domain.item.entity;
 
+import com.example.warningmarket.common.entity.BaseEntity;
 import com.example.warningmarket.domain.item.entity.Item;
 import com.example.warningmarket.domain.member.entity.Member;
 import jakarta.persistence.*;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Love {
+public class Love extends BaseEntity {
 
     @Id
     @GeneratedValue

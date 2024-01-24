@@ -1,11 +1,15 @@
 package com.example.warningmarket.domain.member.entity;
 
 import com.example.warningmarket.common.value.DefaultValue;
+import com.example.warningmarket.domain.item.entity.Love;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,6 +29,8 @@ public class Member {
     private Authority authority = Authority.USER;
     @Embedded
     private Address address;
+    @OneToMany(mappedBy = "member")
+    private List<Love> loves = new ArrayList<>();
 
     @Builder
     public Member(String username, String email, String password,

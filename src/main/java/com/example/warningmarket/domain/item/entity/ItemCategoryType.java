@@ -33,4 +33,13 @@ public enum ItemCategoryType {
         return null;
     }
 
+    public static ItemCategoryType stringToEnum(String value) {
+        for (ItemCategoryType category : ItemCategoryType.values()) {
+            if (category.toString().equals(value)) {
+                return category;
+            }
+        }
+        return null;
+    }
+
 }

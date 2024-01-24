@@ -4,6 +4,10 @@ spring:
       - classpath:/application-env.yml
     activate:
       on-profile: "prod"
+  data:
+    web:
+      pageable:
+        default-page-size: 10
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

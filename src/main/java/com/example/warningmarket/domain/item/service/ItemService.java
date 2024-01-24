@@ -1,16 +1,18 @@
 package com.example.warningmarket.domain.item.service;
 
 import com.example.warningmarket.common.exception.ApplicationException;
-import com.example.warningmarket.common.exception.CommonErrorCode;
 import com.example.warningmarket.common.util.S3Util;
 import com.example.warningmarket.domain.item.dto.CreateItemRequest;
 import com.example.warningmarket.domain.item.dto.ItemResponse;
+import com.example.warningmarket.domain.item.dto.ItemSearchCondition;
+import com.example.warningmarket.domain.item.dto.ItemSearchListResponse;
 import com.example.warningmarket.domain.item.entity.*;
 import com.example.warningmarket.domain.item.repository.ItemRepository;
 import com.example.warningmarket.domain.item.repository.LoveRepository;
 import com.example.warningmarket.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -78,8 +80,8 @@ public class ItemService {
     /*
     item 리스트 조회
      */
-    public void getItems(Long itemId) {
-
+    public ItemSearchListResponse getItems(ItemSearchCondition condition, Pageable pageable) {
+        return itemRepository.getItems(condition, pageable);
     }
 
     /*

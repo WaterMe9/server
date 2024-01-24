@@ -44,6 +44,9 @@ public class Item extends BaseEntity {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemCategory> itemCategories = new ArrayList<>();
 
+    @OneToMany(mappedBy = "item")
+    private List<Love> loves = new ArrayList<>();
+
     private void setItemImages(List<ItemImage> itemImages){
         for (ItemImage itemImage : itemImages) {
             this.itemImages.add(itemImage);
@@ -68,6 +71,24 @@ public class Item extends BaseEntity {
         this.tradeYn = false;
         setItemCategories(itemCategories);
         setItemImages(itemImages);
+    }
+
+    public void updateItem(String itemName, int price, String description, List<ItemCategory> itemUpdateCategories, List<ItemImage> itemUpdateImages) {
+        this.itemName = itemName;
+        this.price = price;
+        this.description = description;
+        updateCategory(itemUpdateCategories);
+        updateImages(itemUpdateImages);
+    }
+
+    public void updateCategory(List<ItemCategory> itemUpdateCategories) {
+        this.itemCategories.clear();
+        setItemCategories(itemUpdateCategories);
+    }
+
+    public void updateImages(List<ItemImage> itemUpdateImages) {
+        this.itemImages.clear();
+        setItemImages(itemUpdateImages);
     }
 
 }
