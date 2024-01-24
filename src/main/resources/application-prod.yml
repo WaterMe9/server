@@ -4,6 +4,10 @@ spring:
       - classpath:/application-env.yml
     activate:
       on-profile: "prod"
+  servlet:
+    multipart:
+      maxFileSize: 100MB
+      maxRequestSize: 1GB
   data:
     web:
       pageable:
@@ -32,9 +36,12 @@ spring:
   jwt:
     secret: ENC(5LmCYpeen2RivbMcI53zFLBDl4EhadF4HGzBLVfBdwJmAq7qLvBL3927ttjBTGnUdyeMDgEYfp4pLOhPv2TA11VnCokkIHK3GW3XiE3A5k5OuLmr1thQmzGF5o4npFuSgs55LIpOBoEPOlvv24ko7g==)
 
-logging.level:
-  org.hibernate.SQL: debug
-  #org.hibernate.type: trace
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type: trace
 
 cloud:
   aws:
