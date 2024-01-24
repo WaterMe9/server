@@ -16,6 +16,7 @@ public enum CommonErrorCode implements ErrorCode {
     MALFORMED_JWT_EXCEPTION(HttpStatus.UNAUTHORIZED, "잘못된 JWT 서명"),
     EXPIRED_JWT_EXCEPTION(HttpStatus.UNAUTHORIZED, "만료된 JWT 토큰"),
     UNSUPPORTED_JWT_EXCEPTION(HttpStatus.UNAUTHORIZED, "지원되지 않는 JWT 토큰"),
+    NOT_ALLOWED_FILETYPE(HttpStatus.BAD_REQUEST, "허용하지 않는 파일형식")
     ;
 
     private final HttpStatus httpStatus;
