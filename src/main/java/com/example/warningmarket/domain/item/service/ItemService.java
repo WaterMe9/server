@@ -137,6 +137,22 @@ public class ItemService {
     }
 
     /*
+    거래중 상태로 변경
+     */
+    @Transactional
+    public void updateTradeStatus(Long itemId, Member member) {
+        Item item = itemRepository.findById(itemId).orElseThrow(
+                () -> new ApplicationException(NOT_EXIST_ITEM)
+        );
+        if (item.getSeller() != member) {
+            throw new ApplicationException(FORBIDDEN_EXCEPTION);
+        }
+
+        // 거래중 or 취소 상태로 변경
+        item.updateTradeStatus();
+    }
+
+    /*
     ItemCategory 생성
      */
     private List<ItemCategory> generateItemCategory(List<String> itemCategories){
