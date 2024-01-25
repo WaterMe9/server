@@ -75,8 +75,10 @@ public class ItemRepositoryImpl implements ItemRepositoryCustom{
             hasNext = true;
             result.remove(pageable.getPageSize());
         }
+
         Long cursor = null;
         Long lastItemId = result.get(result.size()-1).getItemId();
+
         if (order.equals("love")){
             cursor = result.get(result.size()-1).getLoveCount();
         }

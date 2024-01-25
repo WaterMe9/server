@@ -21,7 +21,6 @@ import java.util.List;
 @RequestMapping("/api/item")
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 public class ItemController {
 
     private final ItemService itemService;
@@ -44,8 +43,6 @@ public class ItemController {
     public ResponseEntity<ApplicationResponse<?>> getItems(Pageable pageable
                                                           , @Validated @ModelAttribute ItemSearchCondition condition) {
         ItemSearchListResponse itemListResponse = itemService.getItems(condition, pageable);
-        log.info("cursorId = {}", condition.getCursorId());
-        log.info("cursor = {}", condition.getCursor());
         return ResponseEntity.ok(new ApplicationResponse<ItemSearchListResponse>(itemListResponse));
     }
 
@@ -69,6 +66,13 @@ public class ItemController {
     public ResponseEntity<ApplicationResponse<?>> loveItem(@Auth Member member
                                                           , @PathVariable("item_id") Long id) {
         itemService.loveItem(id,member);
+        return ResponseEntity.ok(new ApplicationResponse<>());
+    }
+
+    @PostMapping("{item_id}/trade")
+    public ResponseEntity<ApplicationResponse<?>> updateTradeStatus(@Auth Member member
+                                                           , @PathVariable("item_id") Long id) {
+        itemService.updateTradeStatus(id, member);
         return ResponseEntity.ok(new ApplicationResponse<>());
     }
 }

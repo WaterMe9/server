@@ -91,4 +91,8 @@ public class Item extends BaseEntity {
         setItemImages(itemUpdateImages);
     }
 
+    public void updateTradeStatus() {
+        this.tradeYn = !this.tradeYn;
+    }
+
 }
