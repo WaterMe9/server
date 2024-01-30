@@ -1,11 +1,11 @@
 package com.example.warningmarket.domain.member.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SignInRequest {
 

@@ -37,9 +37,9 @@ public class ItemService {
     item 저장
      */
     @Transactional
-    public void createItem(CreateItemRequest request, List<MultipartFile> images, Member member){
+    public Item createItem(CreateItemRequest request, List<MultipartFile> images, Member member){
         // 이미지 존재 여부 체크
-        if (images.isEmpty()) {
+        if (images == null || images.isEmpty()) {
             throw new ApplicationException(NOT_EXIST_IMAGE);
         }
 
@@ -64,7 +64,7 @@ public class ItemService {
                 .build();
 
         // Item & ItemImage & ItemCategory 저장
-        itemRepository.save(item);
+        return itemRepository.save(item);
     }
 
     /*
