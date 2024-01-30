@@ -1,0 +1,65 @@
+== RestDocsTestController
+
+=== 1. 아이템 생성
+==== Request
+
+include::{snippets}/item-controller-test/아이템_생성/http-request.adoc[]
+
+==== Response
+include::{snippets}/item-controller-test/아이템_생성/http-response.adoc[]
+
+=== 2. 아이템 단건 조회
+==== Request
+include::{snippets}/item-controller-test/아이템_단건_조회/http-request.adoc[]
+
+==== Response
+include::{snippets}/item-controller-test/아이템_단건_조회/response-fields-data.adoc[]
+include::{snippets}/item-controller-test/아이템_단건_조회/http-response.adoc[]
+
+=== 3. 아이템 리스트 조회
+
+==== Request
+* 카테고리 여러개인 경우 : ex) categories=디지털기기&categories=유아동
+* order : recent(최신순), love(좋아요순)
+* keyword : 검색어
+* cursorId : 마지막 아이템의 id (단, 첫페이지는 null)
+* cursor : 마지막 아이템의 좋아요 개수 (좋아요순만 해당)
+include::{snippets}/item-controller-test/아이템_전체_조회/http-request.adoc[]
+
+==== Response
+include::{snippets}/item-controller-test/아이템_전체_조회/response-fields-data.adoc[]
+include::{snippets}/item-controller-test/아이템_전체_조회/http-response.adoc[]
+
+=== 4. 아이템 수정
+==== Request
+include::{snippets}/item-controller-test/아이템_수정/http-request.adoc[]
+
+==== Response
+include::{snippets}/item-controller-test/아이템_수정/http-response.adoc[]
+
+=== 5. 아이템 삭제
+==== Request
+include::{snippets}/item-controller-test/아이템_삭제/http-request.adoc[]
+
+==== Response
+include::{snippets}/item-controller-test/아이템_삭제/http-response.adoc[]
+
+
+=== 5. 아이템 좋아요
+==== Request
+include::{snippets}/item-controller-test/아이템_좋아요/http-request.adoc[]
+
+==== Response
+include::{snippets}/item-controller-test/아이템_좋아요/http-response.adoc[]
+
+
+=== 5. 아이템 거래중 상태 변경
+==== Request
+include::{snippets}/item-controller-test/아이템_거래상태_변경/http-request.adoc[]
+
+==== Response
+include::{snippets}/item-controller-test/아이템_거래상태_변경/http-response.adoc[]
+
+
+
+

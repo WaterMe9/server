@@ -6,3 +6,4 @@
 :seclinks:
 
 include::test.adoc[]
+include::item.adoc[]

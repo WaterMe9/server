@@ -2,11 +2,14 @@ package com.example.warningmarket.domain.item.repository.dto;
 
 import com.example.warningmarket.domain.item.entity.Item;
 import com.example.warningmarket.domain.member.entity.Member;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.querydsl.core.annotations.QueryProjection;
 import com.querydsl.core.types.Expression;
 import lombok.Data;
 
 @Data
+@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ItemSearchQueryDto {
 
     private Long itemId;
