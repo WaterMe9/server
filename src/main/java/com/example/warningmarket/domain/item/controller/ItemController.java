@@ -27,7 +27,7 @@ public class ItemController {
 
     @PostMapping()
     public ResponseEntity<ApplicationResponse<?>> createItem(@Auth Member member
-            , @Validated @RequestPart("item_info") CreateItemRequest createItemRequest
+            , @Validated @RequestPart(value = "item_info") CreateItemRequest createItemRequest
             , @RequestPart(value = "item_images", required = false) List<MultipartFile> images) {
         itemService.createItem(createItemRequest, images, member);
         return ResponseEntity.ok(new ApplicationResponse<>());
