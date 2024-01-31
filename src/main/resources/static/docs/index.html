@@ -452,6 +452,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_2_post_테스트">2. POST 테스트</a></li>
 </ul>
 </li>
+<li><a href="#_membercontroller">MemberController</a>
+<ul class="sectlevel2">
+<li><a href="#_1_사용자_정보_조회">1. 사용자 정보 조회</a></li>
+<li><a href="#_2_회원가입">2. 회원가입</a></li>
+<li><a href="#_3_로그인">3. 로그인</a></li>
+<li><a href="#_4_토큰_재발급">4. 토큰 재발급</a></li>
+</ul>
+</li>
 <li><a href="#_restdocstestcontroller_2">RestDocsTestController</a>
 <ul class="sectlevel2">
 <li><a href="#_1_아이템_생성">1. 아이템 생성</a></li>
@@ -597,17 +605,255 @@ Content-Length: 26
 </div>
 </div>
 <div class="sect1">
+<h2 id="_membercontroller">MemberController</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_사용자_정보_조회">1. 사용자 정보 조회</h3>
+<div class="sect3">
+<h4 id="_request_3">Request</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/member HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3NSIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjY0fQ.YGdow9ND7RWe-NXqZaGnyhNWwLTkp3SNhiE3e7ksTemfO7HOXiJZP6mqtToKcJpfBKqlMWEQZDkuVYx9Nad0cw
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_3">Response</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이름</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>temperature</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">온도</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile_image_url</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">프로필 이미지 URL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>city</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">주소(도)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>district</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">주소(시)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>street_number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">주소(도로명 주소)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=UTF-8
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 277
+
+{
+  "status" : 200,
+  "message" : "성공",
+  "data" : {
+    "username" : "윤문김",
+    "email" : "aaa123",
+    "temperature" : 36.5,
+    "city" : "경기도",
+    "district" : "파주시",
+    "profile_image_url" : "https://default",
+    "street_number" : "야당로"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_회원가입">2. 회원가입</h3>
+<div class="sect3">
+<h4 id="_request_4">Request</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/member/sign-up HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 195
+Host: localhost:8080
+
+{
+  "username" : "윤문김",
+  "email" : "aaa123",
+  "password" : "pass123",
+  "city" : "경기도",
+  "district" : "파주시",
+  "password_check" : "pass123",
+  "street_number" : "야당로"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_4">Response</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=UTF-8
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 44
+
+{
+  "status" : 200,
+  "message" : "성공"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_로그인">3. 로그인</h3>
+<div class="sect3">
+<h4 id="_request_5">Request</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/member/sign-in HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Content-Length: 50
+Host: localhost:8080
+
+{
+  "email" : "aaa123",
+  "password" : "pass123"
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_5">Response</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Set-Cookie: RefreshToken=eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE3MDcyOTUyNjN9.r6MOCbmm7948nlfDMWEr0kauzGfa86aODWcl6_yCcuoYUP9kVfSQD5tmBeDFsJkH2CDHYYLVyJYnjQxucT0Llg; Path=/; Domain=localhost; Max-Age=604800; Expires=Wed, 7 Feb 2024 08:41:03 GMT; Secure; HttpOnly; SameSite=None
+Content-Type: application/json;charset=UTF-8
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 232
+
+{
+  "status" : 200,
+  "message" : "성공",
+  "data" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3NCIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjYzfQ.55L_Tv9Z1fF7032iHLx7AUgyrYAeqy3htWg69bGaYuRziikwkcjX_prhvM2-B8hEQfBs7tcg-Ze5_NhEK_kBRQ"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_토큰_재발급">4. 토큰 재발급</h3>
+<div class="sect3">
+<h4 id="_request_6">Request</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/member/reissue HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3NyIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjY0fQ.-mhTh0vc2BdrpQ-H_dhOZEQ5oZ9MVqVRx4fj9fdAbKRyuvqieE678R97B6DJdC7C7mlJ33spDZ3pM_XzVShcLQ
+Host: localhost:8080
+Cookie: RefreshToken=eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE3MDcyOTUyNjR9.aXeSImdFuXeGhzQdwDSP_z2j01_99jM4MUWKZYFEiyVTpd_4AQFycfEJgFPgnTpylkzv9BFSJe3XIs3ZohUrsA
+Content-Type: application/x-www-form-urlencoded</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_response_6">Response</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Set-Cookie: RefreshToken=eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE3MDcyOTUyNjR9.aXeSImdFuXeGhzQdwDSP_z2j01_99jM4MUWKZYFEiyVTpd_4AQFycfEJgFPgnTpylkzv9BFSJe3XIs3ZohUrsA; Path=/; Domain=localhost; Max-Age=604800; Expires=Wed, 7 Feb 2024 08:41:04 GMT; Secure; HttpOnly; SameSite=None
+Content-Type: application/json;charset=UTF-8
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 0
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Pragma: no-cache
+Expires: 0
+X-Frame-Options: DENY
+Content-Length: 232
+
+{
+  "status" : 200,
+  "message" : "성공",
+  "data" : "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3NyIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjY0fQ.-mhTh0vc2BdrpQ-H_dhOZEQ5oZ9MVqVRx4fj9fdAbKRyuvqieE678R97B6DJdC7C7mlJ33spDZ3pM_XzVShcLQ"
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="_restdocstestcontroller_2">RestDocsTestController</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_1_아이템_생성">1. 아이템 생성</h3>
 <div class="sect3">
-<h4 id="_request_3">Request</h4>
+<h4 id="_request_7">Request</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/item HTTP/1.1
 Content-Type: multipart/form-data;charset=UTF-8; boundary=6o2knFse3p53ty9dmcQvWAIx1zInP11uCfbm
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NyIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjM1NTg3fQ.M9DaO2mC07_3hjDPI_7w4zsxJ9fb1Rdl4LYRmwkphVNMp4q0jDYIZzoVju_H0Yhh68HB6OrFZDLM4UBhQxPy-w
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2OCIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjU3fQ.-FhgpWE1K6x66WUaJkvqBU9-Bja4YkwFPD54B-H2NF8Q6W0AmOvqxWS-YYd_qCbABZWps144xyITafqDcQ29VA
 Host: localhost:8080
 
 --6o2knFse3p53ty9dmcQvWAIx1zInP11uCfbm
@@ -694,7 +940,7 @@ Content-Type: application/json
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_3">Response</h4>
+<h4 id="_response_7">Response</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
@@ -721,17 +967,17 @@ Content-Length: 44
 <div class="sect2">
 <h3 id="_2_아이템_단건_조회">2. 아이템 단건 조회</h3>
 <div class="sect3">
-<h4 id="_request_4">Request</h4>
+<h4 id="_request_8">Request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/item/1802 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NiIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjM1NTg2fQ.vlh9GqtaGjMjVvK1Bve5PWeqXHkyTj7kftpBVoBAoQ9q7GrbvzqHudHjC8UUNSL5ILuZCbkpxr8SlZM8JMmhHg
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/item/352 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NyIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjU2fQ.BmStY6nh-fF3PB6qbWE8VPLgP550-83DqKCd0H4gg7KPzWfY8BObWPUuRzkzLmqJYAsjURF5LkoGeJvt8oqNbQ
 Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_4">Response</h4>
+<h4 id="_response_8">Response</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -847,7 +1093,7 @@ Content-Length: 662
     "price" : 950000,
     "description" : "선응이형 화이팅",
     "item_categories" : [ "디지털기기", "유아동" ],
-    "item_images" : [ "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/0fe875f4-b162-478f-a354-d294f9fabca2.jpeg" ],
+    "item_images" : [ "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/005b49aa-7173-40fc-8a81-3b37bdaf4da4.jpeg" ],
     "love_count" : 0,
     "agree_yn" : false,
     "trade_yn" : false
@@ -860,7 +1106,7 @@ Content-Length: 662
 <div class="sect2">
 <h3 id="_3_아이템_리스트_조회">3. 아이템 리스트 조회</h3>
 <div class="sect3">
-<h4 id="_request_5">Request</h4>
+<h4 id="_request_9">Request</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -883,13 +1129,13 @@ Content-Length: 662
 <div class="listingblock">
 <div class="content">
 <pre>GET /api/item?categories=&amp;keyword=&amp;order=&amp;cursorId=&amp;cursor= HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MiIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjM1NTkxfQ.xdNqUlco9I6i0IeH0T4Xzkt8b7-o6Z-3l_pTR_koyo68NysEahVIwzFx-thBP6zYhQesz-sOoOtTnEVUUxURcg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MyIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjYyfQ.LJEDGbsmPlXLFfb4CuqkDzn-UQgWH-ooqZOSf_cI7GHFDsCNlFATCovJNd4b7GuI7p0F480j3fe3h21QkeEhug
 Host: localhost:8080</pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_5">Response</h4>
+<h4 id="_response_9">Response</h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -999,14 +1245,14 @@ Cache-Control: no-cache, no-store, max-age=0, must-revalidate
 Pragma: no-cache
 Expires: 0
 X-Frame-Options: DENY
-Content-Length: 5144
+Content-Length: 5133
 
 {
   "status" : 200,
   "message" : "성공",
   "data" : {
     "item_list" : [ {
-      "item_id" : 1879,
+      "item_id" : 429,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1014,12 +1260,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/e37c0a06-a0fc-47ae-b575-73c0414b10a1.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/45127ee1-f1c3-4b56-8e54-ab10922df2b4.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1878,
+      "item_id" : 428,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1027,12 +1273,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/07e06d15-113f-4a77-babd-51171e6ae501.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/04690679-c5ff-47f8-83cd-d5dac7397df0.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1877,
+      "item_id" : 427,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1040,12 +1286,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/1b7553c9-c219-4a7b-bb52-84383b8b8e07.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/d6d7bec5-e374-4311-88fa-171f25a12060.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1876,
+      "item_id" : 426,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1053,12 +1299,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/e3dca356-f676-4ad6-ab9b-fbf342a2f3ca.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/5dd7e975-696c-4e58-985f-2ec61e83169f.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1875,
+      "item_id" : 425,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1066,12 +1312,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/6fd7b09e-42a4-48b2-84c9-b1477071e238.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/5717c42e-f3db-4476-a78f-16248a360f48.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1874,
+      "item_id" : 424,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1079,12 +1325,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/3cb370b1-4c1e-4f4d-aaa5-6f0d4883ad3a.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/12f9c9b1-e2f0-438d-b13c-d15231fb5e6d.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1873,
+      "item_id" : 423,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1092,12 +1338,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/865bf7f5-26a4-4c1c-8e76-3776fb36e6c3.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/871578bf-1b2e-4892-8581-3e799787ad2e.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1872,
+      "item_id" : 422,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1105,12 +1351,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/04f986bb-2cd8-4746-a5c3-96605698c9ad.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/9bd0a896-0916-45fb-a746-0a333fd928ec.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1871,
+      "item_id" : 421,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1118,12 +1364,12 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/eb494834-c518-4cc3-ba7e-dc35686255fe.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/66ff16c0-693b-4837-b347-10b84418c0f8.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     }, {
-      "item_id" : 1870,
+      "item_id" : 420,
       "item_name" : "선응이형",
       "seller_name" : "테스트유저",
       "seller_city" : "파주시",
@@ -1131,14 +1377,14 @@ Content-Length: 5144
       "seller_temperature" : 36.5,
       "seller_profile_image_url" : "https://default",
       "price" : 950000,
-      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/3e006bad-3511-4912-ba4f-0f33bf7c23c6.jpeg",
+      "item_image" : "https://s3.ap-northeast-2.amazonaws.com/market---bucket/item/c17136fe-958d-497c-84df-2ec0ea2a928d.jpeg",
       "love_count" : 0,
       "agree_yn" : false,
       "trade_yn" : false
     } ],
     "has_next" : true,
     "cursor" : null,
-    "last_item_id" : 1870
+    "last_item_id" : 420
   }
 }</code></pre>
 </div>
@@ -1148,12 +1394,12 @@ Content-Length: 5144
 <div class="sect2">
 <h3 id="_4_아이템_수정">4. 아이템 수정</h3>
 <div class="sect3">
-<h4 id="_request_6">Request</h4>
+<h4 id="_request_10">Request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /api/item/1836 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /api/item/386 HTTP/1.1
 Content-Type: multipart/form-data;charset=UTF-8; boundary=6o2knFse3p53ty9dmcQvWAIx1zInP11uCfbm
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2OSIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjM1NTg5fQ.q5S4u_qsWUly1OwvtMjDtelquQGuGZxKKLTT99YuTzWuomLBiEquC-yfUn3erO6nB_NaOUmd2Gyua1hHMxuhHA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MCIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjU5fQ.pzM90snB7yuTUs_n3nLmqThtyAQubXA4H-7hp1fJqlZsZEceqzyvHUO4AV44G533F9IylDbQaY1vf0e82GXvWQ
 Host: localhost:8080
 
 --6o2knFse3p53ty9dmcQvWAIx1zInP11uCfbm
@@ -1240,7 +1486,7 @@ Content-Type: application/json
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_6">Response</h4>
+<h4 id="_response_10">Response</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
@@ -1267,17 +1513,17 @@ Content-Length: 44
 <div class="sect2">
 <h3 id="_5_아이템_삭제">5. 아이템 삭제</h3>
 <div class="sect3">
-<h4 id="_request_7">Request</h4>
+<h4 id="_request_11">Request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/item/1825 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2OCIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjM1NTg4fQ.mBlgq9jb5WFXrLtW8M08LY4bYg4YRzJsehvsRAmdnfy8rK2yKi-A808OZiz1zE25IuFZdIfD1LFk2WW5twTkFA
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/item/375 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2OSIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjU4fQ.PBqqJLmu_xEbUp4R8wASeqYlxYx2YVxX0210ZDBmQNAeUlO4GhGsrmtj_HUxcQwlDgcrK_i_m-aIBgwK5tQHnA
 Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_7">Response</h4>
+<h4 id="_response_11">Response</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
@@ -1304,18 +1550,18 @@ Content-Length: 44
 <div class="sect2">
 <h3 id="_5_아이템_좋아요">5. 아이템 좋아요</h3>
 <div class="sect3">
-<h4 id="_request_8">Request</h4>
+<h4 id="_request_12">Request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/item/1847/love HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MCIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjM1NTg5fQ.6Xqe9KOtoazlKFPrcv3hTLELElETLd-wP-QlO2o39DmkbVAwvFb0Pol-RN5gEGdAQTcGwhl6V23hjU-VsXKgPA
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/item/397/love HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MSIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjYwfQ.U-gxLuJfTLdSDtdk0UiAkezsmUr28jpALjyA7vXYeKn2TTrHZ-B6XOVRlFnvYUGV9wxiuv0xwTySgOdEmdpvMA
 Host: localhost:8080
 Content-Type: application/x-www-form-urlencoded</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_8">Response</h4>
+<h4 id="_response_12">Response</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
@@ -1342,18 +1588,18 @@ Content-Length: 44
 <div class="sect2">
 <h3 id="_5_아이템_거래중_상태_변경">5. 아이템 거래중 상태 변경</h3>
 <div class="sect3">
-<h4 id="_request_9">Request</h4>
+<h4 id="_request_13">Request</h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/item/1858/trade HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MSIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjM1NTkwfQ.47q1ZBv_W9QKNfHsrxJAfZrYR3tkk8qqXuNk5c7JE8ym3j4z0TFurzxYHdUMzt-Kd2CvCbBLcakPQVdmamOWEw
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/item/408/trade HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3MiIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNzA2NjkyMjYxfQ.X6m6_Hrhl8yeMPKnm6T7dwscY4VzE632-Zt9PnyNqY7Z7i9dC53rKlCTNh21IosyB41WzVg3f4K0bMdePIrVTA
 Host: localhost:8080
 Content-Type: application/x-www-form-urlencoded</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_response_9">Response</h4>
+<h4 id="_response_13">Response</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
@@ -1383,7 +1629,7 @@ Content-Length: 44
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2024-01-30 23:46:02 +0900
+Last updated 2024-01-31 17:31:41 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
