@@ -44,7 +44,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/", "/error/**",
                                 "/health/check", "/restdocs/**",
-                                "/api/member/sign-up", "/api/member/sign-in", "api/member/reissue"
+                                "/api/member/sign-up", "/api/member/sign-in"
                         ).permitAll()    // 해당 URL은 인증 절차 수행 생략 가능
                         .anyRequest().authenticated())                  // 나머지 요청들은 모두 인증 절차 수행해야함
 
