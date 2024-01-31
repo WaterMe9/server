@@ -1,6 +1,7 @@
 package com.example.warningmarket.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.Filter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ abstract public class AbstractRestDocsTests {
     @Autowired
     protected ObjectMapper objectMapper;
 
+    @Autowired
+    private Filter[] springSecurityFilterChain;
+
     @BeforeEach
     void setUp(
             final WebApplicationContext context,
@@ -52,6 +56,7 @@ abstract public class AbstractRestDocsTests {
                 .alwaysDo(MockMvcResultHandlers.print())
                 .alwaysDo(restDocs)
                 .addFilters(new CharacterEncodingFilter("UTF-8", true))
+                .addFilters(springSecurityFilterChain)
                 .build();
     }
 
