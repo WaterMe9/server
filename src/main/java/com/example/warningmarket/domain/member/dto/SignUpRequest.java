@@ -1,5 +1,7 @@
 package com.example.warningmarket.domain.member.dto;
 
+import com.example.warningmarket.domain.member.entity.Address;
+import com.example.warningmarket.domain.member.entity.Member;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -32,4 +34,18 @@ public class SignUpRequest {
     @JsonProperty("street_number")
     @NotBlank(message = "주소(도로명 주소)는 필수값입니다.")
     private String streetNumber;
+
+    public Member toEntity() {
+        return Member.builder()
+                .username(username)
+                .email(email)
+                .address(
+                        Address.builder()
+                                .city(city)
+                                .district(district)
+                                .streetNumber(streetNumber)
+                                .build()
+                )
+                .build();
+    }
 }

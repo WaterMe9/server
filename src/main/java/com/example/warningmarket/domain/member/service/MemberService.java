@@ -1,5 +1,6 @@
 package com.example.warningmarket.domain.member.service;
 
+import com.example.warningmarket.common.exception.ApplicationException;
 import com.example.warningmarket.common.jwt.TokenProvider;
 import com.example.warningmarket.common.service.SecurityService;
 import com.example.warningmarket.domain.member.dto.MemberResponse;
@@ -8,7 +9,6 @@ import com.example.warningmarket.domain.member.dto.SignUpRequest;
 import com.example.warningmarket.domain.member.dto.TokenDto;
 import com.example.warningmarket.domain.member.entity.Address;
 import com.example.warningmarket.domain.member.entity.Member;
-import com.example.warningmarket.domain.member.exception.MemberValidation;
 import com.example.warningmarket.domain.member.repository.MemberRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +17,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.example.warningmarket.domain.member.exception.MemberErrorCode.DUPLICATE_EMAIL;
+import static com.example.warningmarket.domain.member.exception.MemberErrorCode.NOT_MATCH_PASSWORD;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final MemberValidation memberValidation;
     private final SecurityService securityService;
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
@@ -34,8 +36,12 @@ public class MemberService {
 
     @Transactional
     public void signUp(SignUpRequest request) {
-        memberValidation.duplicateEmail(request.getEmail());
-        memberValidation.checkPassword(request.getPassword(), request.getPasswordCheck());
+        if (memberRepository.existsByEmail(request.getEmail())) {
+            throw new ApplicationException(DUPLICATE_EMAIL);
+        }
+        if(!request.getPassword().equals(request.getPasswordCheck())) {
+            throw new ApplicationException(NOT_MATCH_PASSWORD);
+        }
 
         Address address = Address.builder()
                 .city(request.getCity())
