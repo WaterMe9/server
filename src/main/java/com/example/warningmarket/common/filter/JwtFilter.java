@@ -28,10 +28,9 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        String jwt = tokenProvider.resolveToken(request);
-
         //유효성 검사 후 토큰에 해당하는 Authentication 을 가져와 SecurityContext 에 저장
         try {
+            String jwt = tokenProvider.resolveToken(request);
             tokenProvider.validateToken(jwt);
             Authentication authentication = tokenProvider.getAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -53,7 +52,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String[] excludePath = {
                 "/", "/error/**",
                 "/health/check", "/restdocs/**",
-                "/api/member/sign-up", "/api/member/sign-in", "/api/member/reissue"
+                "/api/member/sign-up", "/api/member/sign-in"
         };
         String path = request.getRequestURI();
         return Arrays.stream(excludePath).anyMatch(ep -> pathMatcher.match(ep, path));
