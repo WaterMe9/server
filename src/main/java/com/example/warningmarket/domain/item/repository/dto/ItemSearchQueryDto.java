@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.querydsl.core.annotations.QueryProjection;
 import com.querydsl.core.types.Expression;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -36,6 +37,7 @@ public class ItemSearchQueryDto {
 
     private boolean tradeYn;
 
+    @Builder
     @QueryProjection
     public ItemSearchQueryDto(Item item, Member member, Long loveCount, String itemImageUrl) {
         this.itemId = item.getId();
