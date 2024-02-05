@@ -100,7 +100,7 @@ public class ItemService {
     item 수정 : s3에서 기존 이미지 삭제 처리는 아직x
      */
     @Transactional
-    public void updateItem(Long itemId, CreateItemRequest request, List<MultipartFile> images, Member member) {
+    public Item updateItem(Long itemId, CreateItemRequest request, List<MultipartFile> images, Member member) {
         // 검증
         Item item = validateMember(itemId, member);
 
@@ -115,6 +115,8 @@ public class ItemService {
 
         // Item 수정
         item.updateItem(request.getItemName(), request.getPrice(), request.getDescription(), itemCategories, itemImages);
+
+        return item;
     }
 
     /*

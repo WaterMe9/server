@@ -1,6 +1,7 @@
 package com.example.warningmarket.domain.item.controller;
 
 import com.example.warningmarket.common.AbstractRestDocsTests;
+import com.example.warningmarket.domain.item.MultiPartFileUtil;
 import com.example.warningmarket.domain.item.dto.CreateItemRequest;
 import com.example.warningmarket.domain.item.entity.Item;
 import com.example.warningmarket.domain.item.repository.ItemRepository;
@@ -26,6 +27,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import static com.example.warningmarket.domain.item.MultiPartFileUtil.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -77,16 +79,9 @@ public class ItemControllerTest extends AbstractRestDocsTests {
         accessToken = tokenDto.getAccessToken();
     }
 
-    private MockMultipartFile getMockImageFile() throws IOException {
-        MockMultipartFile file;
-        try(FileInputStream fileInputStream = new FileInputStream("src/test/resources/testdata/test.jpeg")){
-            file = new MockMultipartFile("item_images", "test.jpeg", "image/jpeg", fileInputStream);
-        }
-        return file;
-    }
 
     private void createItem() throws IOException {
-        MultipartFile image = getMockImageFile();
+        MultipartFile image = getMultiPartFile();
         Member member = memberRepository.findByEmail(email).orElseThrow();
         Item item = itemService.createItem(createItemRequest(), List.of(image), member);
         itemId = item.getId().toString();
@@ -115,7 +110,7 @@ public class ItemControllerTest extends AbstractRestDocsTests {
     ) throws IOException {
 
         // 이미지 추가
-        final MockMultipartFile image = getMockImageFile();
+        final MockMultipartFile image = getMultiPartFile();
 
         multipartRequest.file(image);
         multipartRequest.file(image);
